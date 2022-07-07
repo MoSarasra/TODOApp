@@ -27,6 +27,27 @@ function buildNewTodo(value) {
     todoList.append(parentLi);
 }
 
+
+function addButtons(randomId){
+  const parentLi = document.getElementById(`${randomId}`);
+  const deleteButton = document.createElement('button');
+  deleteButton.textContent = 'delete';
+  deleteButton.classList.add('actions');
+  deleteButton.addEventListener('click', () => {
+      deleteTodo(randomId);
+  });
+  // create edit button
+  const editButton = document.createElement('button');
+  editButton.textContent = 'edit';
+  editButton.classList.add('actions');
+  // add title and delete and edit to li
+  editButton.addEventListener('click', () => {
+     editTodo(randomId);
+  });
+  parentLi.append(deleteButton, editButton);
+
+}
+
 function deleteTodo(randomId) {
     const todoItem1 = document.getElementById(`${randomId}`);
     todoItem1.remove();
@@ -55,9 +76,8 @@ function editTodo(randomId){
     } else {
 
       const item = document.getElementById(`${randomId}`);
-      item.value = editText;
-      alert(item.value);
-      alert(editText);
+      item.innerText = editText;
+      addButtons(randomId);
       alert('success');
     }
     
